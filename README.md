@@ -570,7 +570,7 @@
 </footer>
 
 <script>
-  var target = new Date("2027-03-20T19:00:00");
+  var target = new Date("2027-03-20T15:00:00");
 
   function updateCountdown(){
     var now = new Date();
