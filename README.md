@@ -351,52 +351,51 @@
   /* ---------- GALLERY ---------- */
   .gallery{
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(0.7rem, 3vw, 1.4rem);
-    max-width: 900px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.8rem, 3vw, 1.6rem);
+    max-width: 640px;
     width:100%;
   }
 
   .frame{
-    aspect-ratio: 3/4;
+    aspect-ratio: 4/5;
     border: 1px solid var(--gold-dim);
     position: relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap: 0.7rem;
-    padding: 0.8rem;
+    overflow: hidden;
   }
   .frame::before{
     content:"";
     position:absolute;
     inset: 7px;
-    border: 1px solid rgba(205,164,104,0.35);
+    border: 1px solid rgba(205,164,104,0.45);
+    z-index: 2;
+    pointer-events: none;
   }
-  .frame svg{
-    width: 26px;
-    height: 26px;
-    stroke: var(--gold);
-    fill:none;
-    stroke-width: 1;
-    opacity: 0.8;
+  .frame img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(22%) saturate(85%) contrast(1.04) brightness(0.94);
+    transition: filter 0.5s ease, transform 0.6s ease;
   }
-  .frame-label{
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.18em;
-    color: var(--gold);
-    opacity: 0.7;
+  .frame::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(160deg, rgba(122,46,58,0.22), rgba(43,15,20,0.28));
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 1;
   }
-
-  @media (max-width: 640px){
-    .gallery{ grid-template-columns: repeat(2, 1fr); }
+  .frame:hover img{
+    filter: sepia(6%) saturate(100%) contrast(1.02) brightness(1);
+    transform: scale(1.04);
   }
 
   @media (max-width: 380px){
-    .gallery{ grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
-    .frame-label{ font-size: 0.5rem; letter-spacing: 0.1em; }
+    .gallery{ gap: 0.6rem; }
     .unite-line{ letter-spacing: 0.1em; }
     .venue-line{ letter-spacing: 0.08em; }
     .venue-address{ letter-spacing: 0.04em; }
@@ -545,18 +544,10 @@
 <section class="reveal" id="gallery-section">
   <p class="section-eyebrow">A Preview</p>
   <div class="gallery">
-    <div class="frame">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.4"/><path d="M21 15l-5-5L5 21"/></svg>
-      <p class="frame-label">Photo to Come</p>
-    </div>
-    <div class="frame">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.4"/><path d="M21 15l-5-5L5 21"/></svg>
-      <p class="frame-label">Photo to Come</p>
-    </div>
-    <div class="frame">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.4"/><path d="M21 15l-5-5L5 21"/></svg>
-      <p class="frame-label">Photo to Come</p>
-    </div>
+    <div class="frame"><img src="photos/1.jpg" alt="Neecha and Alborz holding hands by the lake" loading="lazy"></div>
+    <div class="frame"><img src="photos/2.jpg" alt="Neecha and Alborz embracing in the mountains" loading="lazy"></div>
+    <div class="frame"><img src="photos/3.jpg" alt="Neecha and Alborz walking together by the lake" loading="lazy"></div>
+    <div class="frame"><img src="photos/4.jpg" alt="Neecha and Alborz sharing a kiss by the lake" loading="lazy"></div>
   </div>
 </section>
 
