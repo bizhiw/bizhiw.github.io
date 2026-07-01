@@ -81,11 +81,12 @@
   section{
     position: relative;
     z-index: 3;
-    padding: 5.5rem 1.5rem;
+    padding: clamp(3rem, 10vw, 5.5rem) clamp(1rem, 5vw, 1.5rem);
     display:flex;
     flex-direction:column;
     align-items:center;
     text-align:center;
+    width: 100%;
   }
 
   .reveal{
@@ -113,7 +114,7 @@
     width: 6px; height: 6px;
     background: var(--gold);
     transform: rotate(45deg);
-    margin: 0 0.6rem;
+    margin: 0 clamp(0.25rem, 1.6vw, 0.6rem);
     vertical-align: middle;
   }
 
@@ -122,7 +123,7 @@
     position: relative;
     width: 100%;
     max-width: 620px;
-    padding: 3.2rem 2.2rem;
+    padding: clamp(1.8rem, 7vw, 3.2rem) clamp(1.1rem, 5vw, 2.2rem);
     border: 1px solid var(--gold-dim);
     border-radius: 12px;
   }
@@ -136,32 +137,32 @@
   }
   .corner{
     position:absolute;
-    width: 34px;
-    height: 34px;
+    width: clamp(22px, 6vw, 34px);
+    height: clamp(22px, 6vw, 34px);
     stroke: var(--gold);
     fill:none;
     stroke-width: 1;
     opacity: 0.85;
   }
-  .corner.tl{ top:14px; left:14px; }
-  .corner.tr{ top:14px; right:14px; transform: scaleX(-1); }
-  .corner.bl{ bottom:14px; left:14px; transform: scaleY(-1); }
-  .corner.br{ bottom:14px; right:14px; transform: scale(-1,-1); }
+  .corner.tl{ top:10px; left:10px; }
+  .corner.tr{ top:10px; right:10px; transform: scaleX(-1); }
+  .corner.bl{ bottom:10px; left:10px; transform: scaleY(-1); }
+  .corner.br{ bottom:10px; right:10px; transform: scale(-1,-1); }
 
   /* ---------- HERO ---------- */
   .hero{
     min-height: 100vh;
     justify-content:center;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: clamp(1.5rem, 6vw, 3rem);
+    padding-bottom: clamp(1.5rem, 6vw, 3rem);
   }
 
   .hero-card{
-    padding: 3.4rem 2rem 2.6rem;
+    padding: clamp(2.2rem, 8vw, 3.4rem) clamp(1.1rem, 6vw, 2rem) clamp(1.8rem, 6vw, 2.6rem);
   }
 
   .moth{
-    width: 56px;
+    width: clamp(40px, 12vw, 56px);
     height: auto;
     stroke: var(--gold);
     fill: none;
@@ -175,11 +176,11 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap: 0.4rem;
+    gap: clamp(0.2rem, 1.5vw, 0.4rem);
     margin-bottom: 0.6rem;
   }
   .vine{
-    width: 120px;
+    width: clamp(72px, 26vw, 120px);
     height: auto;
     stroke: var(--gold);
     fill:none;
@@ -228,25 +229,28 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap: 1.2rem;
+    flex-wrap: wrap;
+    gap: clamp(0.5rem, 3vw, 1.2rem);
     margin: 1.6rem 0 1.2rem;
   }
 
   .burst{
-    width: 46px;
-    height: 56px;
+    width: clamp(28px, 9vw, 46px);
+    height: clamp(34px, 11vw, 56px);
     stroke: var(--gold);
     stroke-width: 0.8;
     opacity: 0.7;
+    flex-shrink: 0;
   }
   .burst.right{ transform: scaleX(-1); }
 
   .date-big{
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    font-size: clamp(1.9rem, 6vw, 2.6rem);
-    letter-spacing: 0.12em;
+    font-size: clamp(1.5rem, 7vw, 2.6rem);
+    letter-spacing: clamp(0.02em, 1.5vw, 0.12em);
     color: var(--gold-bright);
+    white-space: nowrap;
   }
 
   .venue-line{
@@ -302,20 +306,23 @@
   /* ---------- COUNTDOWN ---------- */
   .countdown{
     display:flex;
-    gap: clamp(1rem, 4vw, 2.4rem);
-    flex-wrap: wrap;
+    gap: clamp(0.6rem, 4vw, 2.4rem);
+    flex-wrap: nowrap;
     justify-content:center;
+    width: 100%;
+    max-width: 480px;
   }
 
   .badge{
-    width: 96px;
-    height: 96px;
+    width: clamp(58px, 20vw, 96px);
+    height: clamp(58px, 20vw, 96px);
     border-radius: 50%;
     border: 1px solid var(--gold);
     display:flex;
     align-items:center;
     justify-content:center;
     position: relative;
+    flex-shrink: 0;
   }
   .badge::before{
     content:"";
@@ -327,24 +334,25 @@
   .badge-num{
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    font-size: 1.7rem;
+    font-size: clamp(1rem, 4.5vw, 1.7rem);
     color: var(--gold-bright);
   }
   .badge-label{
     font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
+    font-size: clamp(0.5rem, 1.8vw, 0.6rem);
+    letter-spacing: 0.1em;
     color: var(--gold);
     opacity: 0.75;
     margin-top: 0.6rem;
+    white-space: nowrap;
   }
-  .badge-col{ display:flex; flex-direction:column; align-items:center; }
+  .badge-col{ display:flex; flex-direction:column; align-items:center; min-width: 0; }
 
   /* ---------- GALLERY ---------- */
   .gallery{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.4rem;
+    gap: clamp(0.7rem, 3vw, 1.4rem);
     max-width: 900px;
     width:100%;
   }
@@ -386,6 +394,14 @@
     .gallery{ grid-template-columns: repeat(2, 1fr); }
   }
 
+  @media (max-width: 380px){
+    .gallery{ grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .frame-label{ font-size: 0.5rem; letter-spacing: 0.1em; }
+    .unite-line{ letter-spacing: 0.1em; }
+    .venue-line{ letter-spacing: 0.08em; }
+    .venue-address{ letter-spacing: 0.04em; }
+  }
+
   /* ---------- DETAILS ---------- */
   .venue-name{
     font-family: 'Cinzel', serif;
@@ -416,12 +432,12 @@
   }
 
   /* ---------- FOOTER ---------- */
-  footer{ padding: 4rem 1.5rem 3.5rem; }
+  footer{ padding: clamp(2.5rem, 8vw, 4rem) 1.2rem clamp(2.2rem, 6vw, 3.5rem); }
   footer .names-small{
     font-family: 'Cinzel', serif;
     font-weight: 600;
-    font-size: 1rem;
-    letter-spacing: 0.2em;
+    font-size: clamp(0.82rem, 3vw, 1rem);
+    letter-spacing: 0.15em;
     color: var(--gold-bright);
   }
   footer .fine{
