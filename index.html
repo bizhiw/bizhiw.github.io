@@ -554,7 +554,7 @@
 </section>
 
 <section class="reveal" id="details-section">
-  <p class="section-eyebrow">The Place</p>
+  <p class="section-eyebrow">The Venue</p>
   <div class="card">
     <svg class="corner tl" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/></svg>
     <svg class="corner tr" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/></svg>
