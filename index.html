@@ -1,625 +1,727 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Neecha &amp; Alborz — Save the Date</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neecha &amp; Alborz</title>
+<meta name="description" content="Neecha & Alborz — Save the date.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link rel="icon" type="image/webp" href="/favicon.webp">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --wine-1:#2c0a10;
-    --wine-2:#43121a;
-    --wine-3:#560f1a;
-    --gold:#cda468;
-    --gold-bright:#e6c98d;
-    --gold-dim:#8a6a42;
-    --cream:#ecdec1;
-  }
+/* ─────────────────────────────────────────────────────────────
+   TOKENS
+   ───────────────────────────────────────────────────────────── */
+:root{
+  /* The page sits at the old footer tone; the footer drops a step
+     below it so the two still read apart. */
+  --oxblood:      #3E0E0C;
+  --oxblood-deep: #2C0A08;
+  --cream:        #EFE7D7;
+  --cream-dim:    #D9CDB8;
+  /* Ink for type printed on the mirror glass — a light silvered grey
+     (median luma 234), so oxblood ink clears ~9:1, as on paper. */
+  --ink-red:      #5A1512;
 
-  *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  /* Ballet carries the names and every heading; Garamond, set in
+     small letterspaced caps, carries the accents. */
+  --script: "Ballet", cursive;
+  --serif:  "Cormorant Garamond", Garamond, Georgia, serif;
 
-  body{
-    background:
-      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(86,15,26,0.5), transparent 60%),
-      radial-gradient(ellipse 80% 70% at 50% 100%, rgba(44,10,16,0.6), transparent 60%),
-      linear-gradient(180deg, var(--wine-2) 0%, var(--wine-1) 100%);
-    color: var(--cream);
-    font-family: 'EB Garamond', serif;
-    overflow-x: hidden;
-    position: relative;
-  }
+  --measure: 34rem;
+  --gutter: clamp(1.5rem, 6vw, 5rem);
+  --section-y: clamp(4.5rem, 12vw, 9rem);
+}
 
-  /* grain texture */
-  body::before{
-    content:"";
-    position: fixed;
-    inset:0;
-    background-image:
-      radial-gradient(rgba(230,201,141,0.05) 1px, transparent 1px),
-      radial-gradient(rgba(0,0,0,0.25) 1px, transparent 1px);
-    background-size: 3px 3px, 3.5px 3.5px;
-    background-position: 0 0, 1.7px 1.7px;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.65;
-  }
+*,*::before,*::after{ box-sizing:border-box; }
 
-  .vignette{
-    position: fixed;
-    inset:0;
-    box-shadow: inset 0 0 180px 50px rgba(0,0,0,0.55);
-    pointer-events: none;
-    z-index: 2;
-  }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 
-  .embers{
-    position: fixed;
-    inset:0;
-    pointer-events:none;
-    z-index: 2;
-    overflow:hidden;
-  }
-  .ember{
-    position:absolute;
-    bottom:-5%;
-    opacity:0;
-    animation: rise linear infinite;
-  }
-  @keyframes rise{
-    0%{ transform: translateY(0) translateX(0); opacity:0; }
-    10%{ opacity:0.7; }
-    85%{ opacity:0.35; }
-    100%{ transform: translateY(-110vh) translateX(30px); opacity:0; }
-  }
+body{
+  margin:0;
+  /* Each section now sets its own backdrop; the base colour just
+     fills any seams and is the fallback if an image fails. */
+  background:var(--oxblood);
+  color:var(--cream);
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(1rem, 0.95rem + 0.3vw, 1.1rem);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
 
-  /* uppercase everywhere, no italics */
-  h1,h2,h3,p,span,a{ text-transform: uppercase; font-style: normal; }
+img{ max-width:100%; display:block; }
 
-  section{
-    position: relative;
-    z-index: 3;
-    padding: clamp(3rem, 10vw, 5.5rem) clamp(1rem, 5vw, 1.5rem);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    width: 100%;
-  }
+/* ─────────────────────────────────────────────────────────────
+   TYPE PRIMITIVES
+   ───────────────────────────────────────────────────────────── */
+.eyebrow{
+  font-size:clamp(0.62rem, 0.55rem + 0.3vw, 0.75rem);
+  letter-spacing:0.34em;
+  text-transform:uppercase;
+  font-weight:500;
+  margin:0;
+}
 
-  .reveal{
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 1s ease, transform 1s ease;
-  }
-  .reveal.in{ opacity: 1; transform: translateY(0); }
+.script{
+  font-family:var(--script);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:0.01em;
+}
 
-  /* shared rule / divider styles */
-  .rule{
-    width: 60%;
-    max-width: 340px;
-    height: 10px;
-    margin: 1.6rem auto;
-    background-image: radial-gradient(circle, var(--gold-dim) 1.3px, transparent 1.6px);
-    background-size: 14px 10px;
-    background-repeat: repeat-x;
-    background-position: center;
-    opacity: 0.8;
-  }
+.rule{
+  width:3.5rem; height:1px; border:0; margin:2.25rem auto;
+  background:currentColor; opacity:0.35;
+}
 
-  .diamond{
-    display:inline-block;
-    width: 6px; height: 6px;
-    background: var(--gold);
-    transform: rotate(45deg);
-    margin: 0 clamp(0.25rem, 1.6vw, 0.6rem);
-    vertical-align: middle;
-  }
+/* ─────────────────────────────────────────────────────────────
+   HERO — the mirror
+   (the .doily* class names are kept from an earlier iteration; the
+    artwork is now the arch mirror.)
+   ───────────────────────────────────────────────────────────── */
+.hero{
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  padding:clamp(1rem, 4vw, 3rem) var(--gutter);
+  position:relative;
+  /* Silk satin behind the mirror. A light oxblood scrim keeps the
+     folds from competing with the frame; the mirror is dark type on
+     bright glass, so it reads regardless. */
+  background:
+    linear-gradient(rgba(44,10,8,0.28), rgba(44,10,8,0.42)),
+    url("background-web.jpg") center / cover no-repeat,
+    var(--oxblood);
+}
 
-  /* ---------- CARD FRAME (shared) ---------- */
-  .card{
-    position: relative;
-    width: 100%;
-    max-width: 620px;
-    padding: clamp(1.8rem, 7vw, 3.2rem) clamp(1.1rem, 5vw, 2.2rem);
-    border: 1px solid var(--gold-dim);
-    border-radius: 12px;
-  }
-  .card::before{
-    content:"";
-    position:absolute;
-    inset: 8px;
-    border: 1px solid rgba(205,164,104,0.4);
-    border-radius: 8px;
-    pointer-events:none;
-  }
-  .corner{
-    position:absolute;
-    width: clamp(22px, 6vw, 34px);
-    height: clamp(22px, 6vw, 34px);
-    stroke: var(--gold);
-    fill:none;
-    stroke-width: 1;
-    opacity: 0.85;
-  }
-  .corner.tl{ top:10px; left:10px; }
-  .corner.tr{ top:10px; right:10px; transform: scaleX(-1); }
-  .corner.bl{ bottom:10px; left:10px; transform: scaleY(-1); }
-  .corner.br{ bottom:10px; right:10px; transform: scale(-1,-1); }
+/* An ORNATE ARCH MIRROR (1000:1653), cropped tight to the frame — do
+   not change the ratio without recropping the artwork.
 
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height: 100vh;
-    justify-content:center;
-    padding-top: clamp(1.5rem, 6vw, 3rem);
-    padding-bottom: clamp(1.5rem, 6vw, 3rem);
-  }
+   WIDTH is the single driver: the lesser of the space available and
+   the width implied by the tallest we allow. Height then follows
+   from aspect-ratio, so the box is ALWAYS exactly 1000:1653.
+   (An explicit height with max-width instead lets the two fight on
+   narrow screens — the width clamps, the height doesn't, and the
+   artwork gets stretched.)
 
-  .hero-card{
-    padding: clamp(2.2rem, 8vw, 3.4rem) clamp(1.1rem, 6vw, 2rem) clamp(1.8rem, 6vw, 2.6rem);
-  }
+   Capped at 52rem tall: the web asset is 1000px wide, so a taller cap
+   would upscale it. See the note in the markup. */
+.doily{
+  position:relative;
+  width:min(100%, calc(min(86svh, 52rem) * 1000 / 1653));
+  aspect-ratio: 1000 / 1653;
+  display:grid;
+  place-items:center;
+}
 
-  .moth{
-    width: clamp(40px, 12vw, 56px);
-    height: auto;
-    stroke: var(--gold);
-    fill: none;
-    stroke-width: 0.9;
-    margin: 0 auto 0.8rem;
-    display:block;
-    opacity: 0.9;
-  }
+/* mirror-web.webp is the supplied transparent mirror, cropped to the
+   frame and saved as lossy WebP (2.5 MB PNG -> 264 KB) — WebP keeps
+   the smooth silver gradients that palette PNG bands badly. Real
+   alpha, correct colour, no filter or blend mode needed. */
+.doily__img{
+  position:absolute;
+  inset:0;
+  width:100%; height:100%;
+  object-fit:contain;   /* belt and braces — never distort the mirror */
+  pointer-events:none;
+  user-select:none;
+  filter:drop-shadow(0 1.5rem 2.5rem rgba(0,0,0,0.4));
+}
 
-  .vine-row{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap: clamp(0.2rem, 1.5vw, 0.4rem);
-    margin-bottom: 0.6rem;
-  }
-  .vine{
-    width: clamp(72px, 26vw, 120px);
-    height: auto;
-    stroke: var(--gold);
-    fill:none;
-    stroke-width: 0.9;
-    opacity: 0.85;
-  }
-  .vine.right{ transform: scaleX(-1); }
+/* THE TEXT PANEL
+   Measured off the artwork, the mirror glass is arched at the top and
+   straight-sided below. The usable rectangle — clear of the arch and
+   the beaded inner border — spans about x 25%..72% and y 32%..80%,
+   centred at (48.75%, 56%). The glass is a light silvered grey
+   (median luma 234), so type is printed in oxblood, as on paper.
+   Script faces vary wildly in width, so rather than guess at font
+   metrics the panel is laid out at a fixed design width and then
+   scaled by JS. The percentages below are the no-JS fallback. */
+.doily__panel{
+  position:relative;
+  z-index:1;
+  width:47%;
+  text-align:center;
+  color:var(--ink-red);
+  transform-origin:50% 50%;
+}
 
-  .eyebrow{
-    font-family: 'Cinzel', serif;
-    font-weight: 500;
-    letter-spacing: 0.35em;
-    font-size: 0.72rem;
-    color: var(--gold);
-    opacity: 0.85;
-    margin: 0.4rem 0 1.2rem;
-  }
+/* Once JS has measured, the panel switches to its design width and
+   is scaled as a unit.
 
-  .names-svg{
-    width: 100%;
-    max-width: 480px;
-    height: auto;
-    margin: 0 auto;
-    display:block;
-  }
-  .names-svg text{
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    fill: var(--gold-bright);
-    letter-spacing: 4px;
-  }
+   CRITICAL: everything inside the panel must be sized in FIXED px
+   from here down. A viewport-relative unit (vw, or a clamp() using
+   one) would shrink on its own and then be multiplied by the scale
+   factor as well, so the block would lose its proportions — the
+   meta line computes to under 3px on a phone. One scale factor,
+   one set of fixed units. The percentage/clamp rules above remain
+   as the no-JS fallback only. */
+/* A fixed design BOX, not just a width: 560 x 926 is the same
+   proportion as BOX_W x BOX_H mapped through the mirror's aspect, so
+   once scaled it fills the usable glass almost exactly. space-between
+   then pins SAVE THE DATE to the top and the date to the bottom, with
+   the names taking everything left over.
+   min-height rather than height: if a very narrow script ever made
+   the names tall enough to overflow 926, the panel simply grows and
+   the scale is computed from its real height, so it still fits.
 
-  .unite-line{
-    font-family: 'EB Garamond', serif;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    font-size: 0.82rem;
-    color: var(--cream);
-    opacity: 0.8;
-    line-height: 1.9;
-    margin-top: 0.6rem;
-  }
+   ABSOLUTELY POSITIONED, and that is load-bearing. As a grid item
+   this box is wider and taller than the mirror at most sizes, and an
+   auto grid track sizes to max-content — so the track grew to 560px
+   and overflowed to the RIGHT, centring the panel inside that
+   oversized track rather than inside the mirror (11px right on a
+   desktop, 37px on a phone, where it escaped the artwork entirely).
+   The row did the same vertically, stretching the mirror past its own
+   aspect-ratio and corrupting the scale. Out of flow it cannot size a
+   track, so the mirror keeps its exact proportions and the panel is
+   centred by left/top plus JS margins of half its measured size. */
+.is-fitted .doily__panel{
+  position:absolute;
+  left:48.75%;             /* centre of the usable glass rectangle */
+  top:56%;                 /* pushed below the arch */
+  margin:0;                /* JS sets the centring margins */
+  width:560px;
+  min-height:926px;        /* 560:926 == BOX_W:BOX_H mapped through 1000:1653 */
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:opacity .35s ease;
+}
+/* Accents sit at the top and bottom of the box (space-between pins
+   them), so BOX_H / min-height set how close they land to the glass
+   edges — a taller box pushes them toward the rim. The names are
+   width-fitted, so a taller box just adds air around them. */
+.is-fitted .doily__panel .eyebrow{
+  font-size:27px; line-height:1.6; margin:0;
+}
+.is-fitted .doily__panel .hero__names{
+  width:100%; margin:0;
+}
+.is-fitted .doily__panel .hero__date{
+  font-size:32px; line-height:1.6;
+}
 
-  .date-wrap{
-    position: relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-wrap: wrap;
-    gap: clamp(0.5rem, 3vw, 1.2rem);
-    margin: 1.6rem 0 1.2rem;
-  }
+/* Safety net: if the mirror fails to load there is no glass behind
+   the type, so switch to cream on the page and outline the glass
+   (inset matches its measured 18% / 21% bounds). */
+.doily--noimg .doily__panel{ color:var(--cream); }
+.doily--noimg::before{
+  content:"";
+  position:absolute; inset:18% 21%;
+  border:1px solid rgba(239,231,215,.3);
+}
 
-  .burst{
-    width: clamp(28px, 9vw, 46px);
-    height: clamp(34px, 11vw, 56px);
-    stroke: var(--gold);
-    stroke-width: 0.8;
-    opacity: 0.7;
-    flex-shrink: 0;
-  }
-  .burst.right{ transform: scaleX(-1); }
+.hero .eyebrow{ margin-bottom:clamp(0.5rem, 1.4vw, 0.9rem); letter-spacing:0.4em; }
 
-  .date-big{
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: clamp(1.5rem, 7vw, 2.6rem);
-    letter-spacing: clamp(0.02em, 1.5vw, 0.12em);
-    color: var(--gold-bright);
-    white-space: nowrap;
-  }
+/* The opening is portrait, so the names stack. On one line the
+   full string "Neecha & Alborz" would govern the size and force it
+   down to roughly half; stacked, only the longest word governs and
+   the height on offer gets used. Each line is measured separately
+   and the widest wins — which is what makes a change of script
+   face (Monsieur La Doulaise to Ballet) a one-line edit. */
+/* OPTICAL OFFSET FOR THE SLANT
+   A right-leaning script hangs its ascenders and flourishes out to
+   the right of the baseline, so a geometrically centred line reads
+   as sitting right of centre. Shifting left by roughly half that
+   overhang re-centres it to the eye. Set in em, so it tracks the
+   font size and survives the panel's scaling. Raise the magnitude
+   if the lean still reads right, lower it if the names look left. */
+.hero__names{
+  --tilt: -0.16em;
+  font-family:var(--script);
+  font-size:clamp(2.4rem, 11vw, 6rem);
+  margin:0 0 clamp(0.5rem, 1.6vw, 1.1rem);
+  width:100%;
+  position:relative;
+  left:var(--tilt);
+}
+/* Ballet has taller ascenders and less flourish overhang than the
+   previous face, and the names were reading congested, so the lines
+   are given real room rather than the 0.95 that suited Monsieur La
+   Doulaise. */
+.hero__names .line{
+  display:block;
+  white-space:nowrap;
+  line-height:1.16;
+}
+.hero__names .amp{
+  font-size:0.45em;
+  line-height:1.5;
+  opacity:0.75;
+}
 
-  .venue-line{
-    font-family: 'EB Garamond', serif;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    font-size: 0.85rem;
-    color: var(--gold);
-    opacity: 0.85;
-    line-height: 1.8;
-    margin-top: 0.2rem;
-  }
+.hero__date{
+  margin:0;
+  font-size:clamp(0.72rem, 0.6rem + 0.6vw, 1rem);
+  letter-spacing:0.3em;
+  line-height:1.6;
+}
 
-  .heart-monogram{
-    width: 64px;
-    height: auto;
-    margin: 1.8rem auto 0;
-    display:block;
-  }
-  .heart-monogram path{ stroke: var(--gold); stroke-width: 1; fill:none; }
-  .heart-monogram text{
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    font-size: 11px;
-    fill: var(--gold-bright);
-    letter-spacing: 2px;
-  }
+/* OPTICAL CENTRING OF LETTERSPACED CAPS
+   letter-spacing adds its space after the LAST glyph too, so a
+   centred line sits half a space left of true centre. text-indent
+   is the usual dodge but browsers disagree on whether it offsets by
+   the full indent or half of it — which is what threw the hero off
+   to one side. Making the run an inline-block and pulling back the
+   exact trailing space is unambiguous: the box now measures the
+   glyphs alone, so centring is exact everywhere. */
+.hero .eyebrow > span,
+.hero__date time{
+  display:inline-block;
+}
+.hero .eyebrow > span{ margin-right:-0.4em; }
+.hero__date time{ margin-right:-0.3em; }
 
-  .scroll-cue{
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.4em;
-    color: var(--gold);
-    opacity: 0.5;
-    animation: pulseFade 2.6s ease-in-out infinite;
-  }
-  @keyframes pulseFade{ 0%,100%{opacity:0.25;} 50%{opacity:0.6;} }
+/* ── PHONES ─────────────────────────────────────────────────────
+   A portrait frame on a portrait screen is the best case, not the
+   worst, so phones keep the framed layout — the hero just claims
+   more width by shrinking its own side padding. */
+@media (max-width: 40rem){
+  .hero{ padding-left:clamp(0.5rem, 3vw, 2rem); padding-right:clamp(0.5rem, 3vw, 2rem); }
 
-  /* ---------- SECTION HEADERS ---------- */
-  .section-eyebrow{
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.35em;
-    font-size: 0.7rem;
-    color: var(--gold);
-    margin-bottom: 2.4rem;
-    opacity: 0.85;
-  }
+  /* One scale factor governs the whole panel, so accents sized for a
+     desktop opening would land at ~8px on a phone. These are design
+     units, so raising them here restores legibility without touching
+     the names, which stay fitted to the panel width either way. */
+  .is-fitted .doily__panel .eyebrow{ font-size:36px; }
+  .is-fitted .doily__panel .hero__date{ font-size:40px; }
+}
 
-  /* ---------- COUNTDOWN ---------- */
-  .countdown{
-    display:flex;
-    gap: clamp(0.6rem, 4vw, 2.4rem);
-    flex-wrap: nowrap;
-    justify-content:center;
-    width: 100%;
-    max-width: 480px;
-  }
+/* The hero text always stays fitted inside the mirror glass and simply
+   scales down with the frame — there is no stacked fallback. The
+   fitting is measured, so it holds at any width right down to the
+   narrowest phones. */
 
-  .badge{
-    width: clamp(58px, 20vw, 96px);
-    height: clamp(58px, 20vw, 96px);
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .badge::before{
-    content:"";
-    position:absolute;
-    inset:6px;
-    border: 1px solid rgba(205,164,104,0.45);
-    border-radius: 50%;
-  }
-  .badge-num{
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: clamp(1rem, 4.5vw, 1.7rem);
-    color: var(--gold-bright);
-  }
-  .badge-label{
-    font-family: 'Cinzel', serif;
-    font-size: clamp(0.5rem, 1.8vw, 0.6rem);
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    opacity: 0.75;
-    margin-top: 0.6rem;
-    white-space: nowrap;
-  }
-  .badge-col{ display:flex; flex-direction:column; align-items:center; min-width: 0; }
+.scroll-cue{
+  position:absolute;
+  bottom:clamp(1rem, 3vw, 2.25rem);
+  left:50%; transform:translateX(-50%);
+  color:var(--cream-dim);
+  text-decoration:none;
+  font-size:0.62rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  opacity:0.7;
+  transition:opacity .3s;
+}
+.scroll-cue:hover,.scroll-cue:focus-visible{ opacity:1; }
 
-  /* ---------- GALLERY ---------- */
-  .gallery{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(0.8rem, 3vw, 1.6rem);
-    max-width: 640px;
-    width:100%;
-  }
+/* ─────────────────────────────────────────────────────────────
+   SECTIONS
+   ───────────────────────────────────────────────────────────── */
+.section{
+  padding:var(--section-y) var(--gutter);
+  position:relative;
+}
 
-  .frame{
-    aspect-ratio: 4/5;
-    border: 1px solid var(--gold-dim);
-    position: relative;
-    overflow: hidden;
-  }
-  .frame::before{
-    content:"";
-    position:absolute;
-    inset: 7px;
-    border: 1px solid rgba(205,164,104,0.45);
-    z-index: 2;
-    pointer-events: none;
-  }
-  .frame img{
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: sepia(22%) saturate(85%) contrast(1.04) brightness(0.94);
-    transition: filter 0.5s ease, transform 0.6s ease;
-  }
-  .frame::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background: linear-gradient(160deg, rgba(122,46,58,0.22), rgba(43,15,20,0.28));
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .frame:hover img{
-    filter: sepia(6%) saturate(100%) contrast(1.02) brightness(1);
-    transform: scale(1.04);
-  }
+.section__inner{
+  max-width:var(--measure);
+  margin:0 auto;
+  text-align:center;
+  position:relative;   /* sit above any section backdrop */
+  z-index:1;
+}
 
-  @media (max-width: 380px){
-    .gallery{ gap: 0.6rem; }
-    .unite-line{ letter-spacing: 0.1em; }
-    .venue-line{ letter-spacing: 0.08em; }
-    .venue-address{ letter-spacing: 0.04em; }
-  }
+/* ── PHOTO-BACKED SECTIONS ──────────────────────────────────────
+   A full-bleed background photo with a dark overlay so cream text
+   stays legible. Both photos are bright (the house has pure white
+   sky), so the overlay is a vertical gradient that deepens through
+   the middle band where the text sits — flat 60% barely clears AA
+   on the brightest pixels, ~68% in the centre clears it comfortably.
+   The image lives on the section; the overlay is a ::before above
+   it; content is z-indexed above both. */
+.section--photo{
+  background:var(--photo) center / cover no-repeat, var(--oxblood-deep);
+  background-attachment:scroll;
+}
+.section--photo::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(
+    rgba(28,7,6,0.62), rgba(20,5,4,0.72) 45%, rgba(28,7,6,0.62));
+}
+.section--place{ --photo:url("heintzman-web.webp"); }
 
-  /* ---------- DETAILS ---------- */
-  .venue-name{
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: clamp(1.4rem, 3.2vw, 1.8rem);
-    letter-spacing: 0.1em;
-    color: var(--gold-bright);
-    margin-bottom: 1rem;
-  }
-  .venue-address{
-    font-family: 'EB Garamond', serif;
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
-    line-height: 1.9;
-    color: var(--cream);
-    opacity: 0.85;
-  }
-  .rsvp-note{
-    margin-top: 1.8rem;
-    padding-top: 1.6rem;
-    border-top: 1px solid rgba(205,164,104,0.3);
-    font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.15em;
-    color: var(--gold);
-    opacity: 0.85;
-  }
+.section__title{
+  font-family:var(--script);
+  font-size:clamp(2.6rem, 6.5vw, 4.25rem);
+  line-height:1.2;
+  margin:0.4rem 0 0;
+  font-weight:400;
+}
 
-  /* ---------- FOOTER ---------- */
-  footer{ padding: clamp(2.5rem, 8vw, 4rem) 1.2rem clamp(2.2rem, 6vw, 3.5rem); }
-  footer .names-small{
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    font-size: clamp(0.82rem, 3vw, 1rem);
-    letter-spacing: 0.15em;
-    color: var(--gold-bright);
-  }
-  footer .fine{
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    opacity: 0.5;
-    margin-top: 0.8rem;
-  }
+.section p{ margin:0 0 1.25rem; }
+.section p:last-child{ margin-bottom:0; }
+
+.lede{
+  font-size:clamp(1.05rem, 1rem + 0.5vw, 1.3rem);
+  font-style:italic;
+  color:var(--cream);
+}
+
+.note{
+  margin-top:clamp(2.5rem, 6vw, 3.5rem);
+  font-style:italic;
+  color:var(--cream-dim);
+}
+
+.address{
+  margin-top:clamp(2rem, 5vw, 2.75rem);
+  font-style:normal;
+  font-size:clamp(0.72rem, 0.62rem + 0.4vw, 0.9rem);
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  line-height:2.2;
+  color:var(--cream-dim);
+}
+
+/* ── ORDER OF EVENTS — the silver tray ──────────────────────────
+   The silk returns as this section's backdrop, and the schedule is
+   engraved on a serving tray sitting on it. */
+.section--events{
+  background:
+    linear-gradient(rgba(44,10,8,0.40), rgba(44,10,8,0.52)),
+    url("background-web.jpg") center / cover no-repeat,
+    var(--oxblood);
+}
+
+/* The tray. container-type makes 1cqw = 1% of the tray's own width,
+   so the schedule below is sized in cqw and stays a FIXED fraction
+   of the tray at every viewport — scale-invariant, no JS. */
+.tray{
+  container-type:inline-size;
+  position:relative;
+  width:min(100%, 30rem);
+  margin:clamp(2.5rem, 6vw, 3.5rem) auto 0;
+  aspect-ratio:900 / 1374;
+  background:url("tray-web.webp") center / contain no-repeat;
+  filter:drop-shadow(0 1rem 2rem rgba(0,0,0,0.38));
+}
+
+/* The engraving sits on the tray's flat oval face — measured at
+   x 22–78%, y 18–81%, but tapering at top and bottom, so the text
+   is inset to the safe straight-sided middle. Dark oxblood ink on
+   the bright silver (face median luma 228). */
+/* Inset to the straight middle of the oval (face is y 18–81%, but it
+   tapers, so we keep clear of the ends). Usable box ≈ 48% wide x 51%
+   tall of the tray. space-between distributes the five stops; sizes
+   in cqw are tuned so the five items plus their gaps fill that height
+   without overflowing — checked against the tallest "COCKTAIL HOUR"
+   for width too. */
+.schedule{
+  position:absolute;
+  inset:24% 26% 25%;
+  margin:0; padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:center;
+  color:var(--ink-red);
+}
+.schedule li{ margin:0; }
+.schedule time{
+  display:block;
+  font-family:var(--serif);
+  font-size:5cqw;
+  font-weight:500;
+  line-height:1;
+  letter-spacing:0.02em;
+}
+.schedule h3{
+  margin:0.4cqw 0 0;
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:3.8cqw;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  line-height:1.1;
+}
+.schedule p{
+  margin:0.1cqw 0 0;
+  font-size:3cqw;
+  font-style:italic;
+  line-height:1.15;
+  color:#7a2a22;   /* a lighter tint of the ink so the note recedes */
+}
+
+/* Footer — the ring photo, darkened. */
+.footer{
+  position:relative;
+  padding:clamp(4rem, 10vw, 7rem) var(--gutter);
+  text-align:center;
+  background:url("footer-web.webp") center / cover no-repeat, var(--oxblood-deep);
+  color:var(--cream-dim);
+  overflow:hidden;
+}
+.footer::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(
+    rgba(20,5,4,0.66), rgba(16,4,3,0.78) 50%, rgba(20,5,4,0.7));
+}
+.footer > *{ position:relative; z-index:1; }
+.footer .script{ font-size:clamp(2.2rem, 5.5vw, 3.4rem); line-height:1.2; color:var(--cream); }
+
+.footer__note{
+  margin:1.25rem 0 0;
+  font-style:italic;
+  font-size:clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+  color:var(--cream);
+}
+.footer small{
+  display:block;
+  margin-top:1.5rem;
+  font-size:0.62rem;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  opacity:0.55;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MOTION
+   ───────────────────────────────────────────────────────────── */
+.reveal{ opacity:0; transform:translateY(14px); }
+.reveal.is-in{
+  opacity:1; transform:none;
+  transition:opacity 1.1s ease, transform 1.1s ease;
+}
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .reveal,.reveal.is-in{ opacity:1; transform:none; transition:none; }
+}
+
+:focus-visible{ outline:2px solid var(--cream); outline-offset:3px; }
 </style>
 </head>
+
 <body>
 
-<div class="vignette"></div>
-<div class="embers" id="embers"></div>
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+     ▸ Ships with mirror-web.webp and background-web.jpg — keep all
+       three files together.
+       NOTE: the mirror web asset is 1000px wide, so it is capped at
+       52rem tall to avoid upscaling. The supplied source is 1263px,
+       so a larger export is possible if you want it sharper still.
+     ══════════════════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="doily">
+    <img class="doily__img" src="mirror-web.webp" alt="" aria-hidden="true"
+         onerror="this.closest('.doily').classList.add('doily--noimg'); this.remove();">
 
-<section class="hero">
-  <div class="card hero-card">
-    <svg class="corner tl" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/><path d="M2 22 C2 12, 12 2, 22 2"/></svg>
-    <svg class="corner tr" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/><path d="M2 22 C2 12, 12 2, 22 2"/></svg>
-    <svg class="corner bl" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/><path d="M2 22 C2 12, 12 2, 22 2"/></svg>
-    <svg class="corner br" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/><path d="M2 22 C2 12, 12 2, 22 2"/></svg>
-
-    <p class="eyebrow">Save the Date</p>
-
-    <svg class="moth" viewBox="0 0 60 40">
-      <path d="M30 6 L30 30"/>
-      <path d="M30 10 C 18 -4, 2 4, 6 18 C 10 30, 24 24, 30 16"/>
-      <path d="M30 10 C 42 -4, 58 4, 54 18 C 50 30, 36 24, 30 16"/>
-      <path d="M30 16 C 22 24, 12 26, 10 34"/>
-      <path d="M30 16 C 38 24, 48 26, 50 34"/>
-      <path d="M30 6 C 27 2, 25 1, 22 2"/>
-      <path d="M30 6 C 33 2, 35 1, 38 2"/>
-    </svg>
-
-    <div class="vine-row">
-      <svg class="vine" viewBox="0 0 130 44">
-        <path d="M2 40 C 30 40, 40 20, 70 18"/>
-        <path d="M20 34 C 24 26, 22 20, 14 18"/>
-        <path d="M40 26 C 44 18, 42 12, 34 10"/>
-        <circle cx="70" cy="18" r="6" opacity="0.6"/>
-        <path d="M70 18 C 76 12, 84 12, 88 18"/>
-        <path d="M70 18 C 76 24, 84 24, 88 18"/>
-      </svg>
-      <svg class="vine right" viewBox="0 0 130 44">
-        <path d="M2 40 C 30 40, 40 20, 70 18"/>
-        <path d="M20 34 C 24 26, 22 20, 14 18"/>
-        <path d="M40 26 C 44 18, 42 12, 34 10"/>
-        <circle cx="70" cy="18" r="6" opacity="0.6"/>
-        <path d="M70 18 C 76 12, 84 12, 88 18"/>
-        <path d="M70 18 C 76 24, 84 24, 88 18"/>
-      </svg>
+    <!-- Essentials only. Anything else belongs in Details below —
+         the glass is small and every extra line shrinks the block. -->
+    <div class="doily__panel">
+      <p class="eyebrow"><span>Save the Date</span></p>
+      <h1 class="hero__names script">
+        <span class="line">Neecha</span>
+        <span class="line amp">&amp;</span>
+        <span class="line">Alborz</span>
+      </h1>
+      <p class="hero__date"><time datetime="2027-03-20">03.20.2027</time></p>
     </div>
+  </div>
 
-    <svg class="names-svg" viewBox="0 0 480 210">
-      <defs>
-        <path id="arc1" d="M40 95 Q240 15 440 95" fill="none"/>
-        <path id="arc2" d="M20 190 Q240 145 460 190" fill="none"/>
-      </defs>
-      <text font-size="46" text-anchor="middle">
-        <textPath href="#arc1" startOffset="50%">NEECHA</textPath>
-      </text>
-      <text font-size="24" x="240" y="105" text-anchor="middle" fill="#e6c98d">&amp;</text>
-      <text font-size="46" text-anchor="middle">
-        <textPath href="#arc2" startOffset="50%">ALBORZ</textPath>
-      </text>
-    </svg>
+  <a class="scroll-cue" href="#details">Details</a>
+</header>
 
-    <p class="unite-line">will joyfully and eternally unite on</p>
 
-    <div class="date-wrap">
-      <svg class="burst" viewBox="0 0 46 56" fill="none">
-        <path d="M40 4 L20 20"/><path d="M44 14 L22 24"/><path d="M46 26 L23 28"/>
-        <path d="M44 38 L22 32"/><path d="M40 48 L20 36"/>
-      </svg>
-      <p class="date-big">03 <span class="diamond"></span> 20 <span class="diamond"></span> 27</p>
-      <svg class="burst right" viewBox="0 0 46 56" fill="none">
-        <path d="M40 4 L20 20"/><path d="M44 14 L22 24"/><path d="M46 26 L23 28"/>
-        <path d="M44 38 L22 32"/><path d="M40 48 L20 36"/>
-      </svg>
+<!-- ══════════════════════════════════════════════════════════
+     THE PLACE
+     ══════════════════════════════════════════════════════════ -->
+<section class="section section--photo section--place" id="details">
+  <div class="section__inner reveal">
+    <p class="eyebrow">The Venue</p>
+    <h2 class="section__title">Heintzman House</h2>
+    <hr class="rule">
+
+    <p class="lede">Together with our loved ones<br>we will joyfully and eternally unite on<br>Saturday, the 20th of March, 2027.</p>
+
+    <address class="address">
+      135 Bay Thorn Drive<br>
+      Thornhill, Ontario&nbsp; L3T&nbsp;3V1
+    </address>
+
+    <p class="note">Formal invitation with all the details to follow.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     ORDER OF EVENTS
+     ══════════════════════════════════════════════════════════ -->
+<section class="section section--events" id="schedule">
+  <div class="section__inner reveal">
+    <p class="eyebrow">Order of Events</p>
+    <h2 class="section__title">The Evening</h2>
+    <hr class="rule">
+
+    <!-- The schedule is engraved on the tray; the tray's own aspect
+         holds the oval, and the list is inset onto its silver face. -->
+    <div class="tray">
+      <ol class="schedule">
+        <li>
+          <time datetime="15:30">3:30</time>
+          <h3>Arrival</h3><p>Drinks on arrival</p>
+        </li>
+        <li>
+          <time datetime="16:00">4:00</time>
+          <h3>Ceremony</h3><p>In the main hall</p>
+        </li>
+        <li>
+          <time datetime="17:00">5:00</time>
+          <h3>Cocktail Hour</h3><p>Throughout the manor</p>
+        </li>
+        <li>
+          <time datetime="19:00">7:00</time>
+          <h3>Dinner</h3><p>Back in the main hall</p>
+        </li>
+        <li>
+          <time datetime="23:00">11:00</time>
+          <h3>Farewell</h3>
+        </li>
+      </ol>
     </div>
-
-    <p class="venue-line">heintzman house · thornhill, ontario</p>
-
-    <svg class="heart-monogram" viewBox="0 0 64 64">
-      <path d="M32 54 C 8 38, 6 20, 20 14 C 28 10, 32 18, 32 18 C 32 18, 36 10, 44 14 C 58 20, 56 38, 32 54 Z"/>
-      <text x="32" y="34" text-anchor="middle">N + A</text>
-    </svg>
-  </div>
-
-  <p class="scroll-cue">Scroll</p>
-</section>
-
-<section class="reveal" id="countdown-section">
-  <p class="section-eyebrow">Until We Say I Do</p>
-  <div class="countdown">
-    <div class="badge-col"><div class="badge"><div class="badge-num" id="cd-days">00</div></div><div class="badge-label">Days</div></div>
-    <div class="badge-col"><div class="badge"><div class="badge-num" id="cd-hours">00</div></div><div class="badge-label">Hours</div></div>
-    <div class="badge-col"><div class="badge"><div class="badge-num" id="cd-mins">00</div></div><div class="badge-label">Minutes</div></div>
-    <div class="badge-col"><div class="badge"><div class="badge-num" id="cd-secs">00</div></div><div class="badge-label">Seconds</div></div>
   </div>
 </section>
 
-<section class="reveal" id="gallery-section">
-  <p class="section-eyebrow">A Preview</p>
-  <div class="gallery">
-    <div class="frame"><img src="photos/1.jpg" alt="Neecha and Alborz holding hands by the lake" loading="lazy"></div>
-    <div class="frame"><img src="photos/2.jpg" alt="Neecha and Alborz embracing in the mountains" loading="lazy"></div>
-    <div class="frame"><img src="photos/3.jpg" alt="Neecha and Alborz walking together by the lake" loading="lazy"></div>
-    <div class="frame"><img src="photos/4.jpg" alt="Neecha and Alborz sharing a kiss by the lake" loading="lazy"></div>
-  </div>
-</section>
 
-<section class="reveal" id="details-section">
-  <p class="section-eyebrow">The Venue</p>
-  <div class="card">
-    <svg class="corner tl" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/></svg>
-    <svg class="corner tr" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/></svg>
-    <svg class="corner bl" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/></svg>
-    <svg class="corner br" viewBox="0 0 34 34"><path d="M2 30 C2 14, 14 2, 30 2"/></svg>
-    <p class="venue-name">Heintzman House</p>
-    <p class="venue-address">135 Bay Thorn Drive<br>Thornhill, Ontario &nbsp;L3T 3V1</p>
-    <p class="rsvp-note">Formal invitation with all the details to follow</p>
-  </div>
-</section>
-
-<footer>
-  <p class="names-small">Neecha &amp; Alborz <span class="diamond"></span> 03 · 20 · 27</p>
-  <p class="fine">We Can't Wait to Celebrate With You</p>
+<footer class="footer">
+  <p class="script">Neecha &amp; Alborz</p>
+  <p class="footer__note">We can’t wait to celebrate with you</p>
+  <small>03 · 20 · 27 &nbsp;·&nbsp; Thornhill, Ontario</small>
 </footer>
 
+
 <script>
-  var target = new Date("2027-03-20T15:00:00");
+/* ── Fit the hero text to the mirror glass ───────────────────────
+   Two passes:
+     1. Size the names so the widest line spans the panel's design
+        width (times NAME_W, which trims them for a little air).
+     2. Scale the whole panel so it fills BOX_W × BOX_H of the mirror
+        (0.47 × 0.47) and centre it on the glass.
+   Doing it by measurement rather than guessing at the metrics of
+   Ballet means any font or wording change still fits. */
+(function(){
+  var DESIGN_W = 560,
+      BOX_W    = 0.47,    /* usable glass ~0.47 wide (x 25-72%)   */
+      BOX_H    = 0.47,    /* usable glass ~0.47 tall (y 32-80%)   */
 
-  function updateCountdown(){
-    var now = new Date();
-    var diff = target - now;
-    if(diff < 0) diff = 0;
+      /* The names are fitted to a fraction of the panel rather than
+         its full width, which is the one knob for their size. Lower
+         = smaller names and more whitespace, and because the panel
+         is space-between with a fixed min-height, the height they
+         give back is redistributed as air above and below. Accents
+         are unaffected. */
+      NAME_W   = 0.85;
 
-    var days = Math.floor(diff / (1000*60*60*24));
-    var hours = Math.floor((diff / (1000*60*60)) % 24);
-    var mins = Math.floor((diff / (1000*60)) % 60);
-    var secs = Math.floor((diff / 1000) % 60);
+  var doily = document.querySelector('.doily'),
+      panel = doily && doily.querySelector('.doily__panel'),
+      names = panel && panel.querySelector('.hero__names'),
+      lines = names ? names.querySelectorAll('.line') : [];
 
-    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  if(!panel || !lines.length) return;
+
+  /* Measure the GLYPHS, not the box. Each .line is display:block, so
+     getBoundingClientRect() on it returns the panel's full width and
+     the fit silently becomes a no-op — which is exactly what went
+     wrong before. A Range over the text nodes gives the real ink. */
+  function textWidth(el){
+    if(document.createRange){
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var w = r.getBoundingClientRect().width;
+      if(w > 0) return w;
+    }
+    return el.getBoundingClientRect().width;
   }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
 
-  var reveals = document.querySelectorAll('.reveal');
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
-      }
+  /* Set inline (not in the stylesheet) so that if JS never runs the
+     hero still shows, laid out by the percentage fallback. */
+  panel.style.opacity = '0';
+
+  function fit(){
+    /* The panel is always fitted — it scales down with the mirror at
+       every width and keeps its position on the glass. There is no
+       stacked fallback. */
+    document.documentElement.classList.add('is-fitted');
+
+    var frame = doily.getBoundingClientRect();
+    if(!frame.width) return;
+
+    panel.style.transform = 'none';
+
+    // 1 ─ widest name line to the design width
+    names.style.fontSize = '';
+    var base = parseFloat(getComputedStyle(names).fontSize),
+        nat  = 0, i;
+    for(i = 0; i < lines.length; i++){
+      // skip the ampersand: it is set well below 1em and would never govern
+      if(lines[i].classList.contains('amp')) continue;
+      nat = Math.max(nat, textWidth(lines[i]));
+    }
+    if(nat > 0) names.style.fontSize = (base * (DESIGN_W * NAME_W / nat)) + 'px';
+
+    // 2 ─ panel to the opening
+    var h = panel.getBoundingClientRect().height;
+    if(!h) return;
+
+    /* Centre by pulling back exactly half the panel's real size.
+       Percentage translate() would resolve against the UNSCALED box
+       and drift once scaled; half-size margins are applied before
+       the transform and scale about the same centre, so this is
+       exact at any scale factor. h is measured, not assumed, so it
+       stays correct if the content ever exceeds the 825 design
+       height. */
+    panel.style.marginLeft = (-DESIGN_W / 2) + 'px';
+    panel.style.marginTop  = (-h / 2) + 'px';
+
+    var scale = Math.min(frame.width * BOX_W / DESIGN_W,
+                         frame.height * BOX_H / h);
+    panel.style.transform = 'scale(' + scale.toFixed(4) + ')';
+  }
+
+  function start(){
+    fit();
+    panel.style.opacity = '1';
+  }
+
+  // Wait for the webfont, but never let a slow CDN hide the hero.
+  var done = false;
+  function once(){ if(!done){ done = true; start(); } }
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(once);
+    setTimeout(once, 1500);
+  } else {
+    window.addEventListener('load', once);
+    setTimeout(once, 1500);
+  }
+
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t); t = setTimeout(fit, 120);
+  });
+})();
+
+
+// Gentle reveal on scroll.
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('is-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.15 });
-  reveals.forEach(function(el){ observer.observe(el); });
-
-  // floating embers
-  var container = document.getElementById('embers');
-  var count = window.innerWidth < 640 ? 10 : 18;
-  for(var i=0; i<count; i++){
-    var ember = document.createElement('div');
-    ember.className = 'ember';
-    var size = 2 + Math.random()*2.5;
-    ember.style.width = size + 'px';
-    ember.style.height = size + 'px';
-    ember.style.left = (Math.random()*100) + 'vw';
-    ember.style.background = '#cda468';
-    ember.style.borderRadius = '50%';
-    ember.style.boxShadow = '0 0 4px 1px rgba(205,164,104,0.6)';
-    ember.style.animationDuration = (10 + Math.random()*12) + 's';
-    ember.style.animationDelay = (Math.random()*16) + 's';
-    container.appendChild(ember);
-  }
+  }, { threshold:0.15, rootMargin:'0px 0px -8% 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
 </script>
 
 </body>
