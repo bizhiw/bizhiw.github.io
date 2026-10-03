@@ -1,0 +1,387 @@
+/* ============================================================
+   Neecha & Alborz — styles
+   Gothic romance: deep purple, black & ivory, ornate blackletter
+   titles (UnifrakturCook) over Cormorant Garamond, with silver
+   objects and ivory lace. Plain CSS, no build step.
+   Edit colours & fonts in :root below.
+   ============================================================ */
+
+:root {
+  /* Eggplant / aubergine — sampled from the silk. Elevated & moody,
+     brown-purple rather than blue, so it reads historical not "goth". */
+  --black: #0e0810;          /* aubergine-black (deepest) */
+  --purple-deep: #1a1018;    /* satin shadow — darkest band */
+  --purple: #321a2a;         /* eggplant — the signature surface */
+  --purple-2: #6a3a54;       /* muted wine accent / hovers */
+  /* Cool pearl / silver light tone (sampled from the abalone shell),
+     with warm ivory kept only for lace accents. */
+  --ivory: #e8e5ea;          /* cool pearl — page background & light text on dark */
+  --cream: #dbd7e0;          /* slightly deeper cool pearl surface */
+  --lace: #efe9dd;           /* warm ivory, for lace accents only */
+  --ink: #201320;            /* dark text (aubergine-black) */
+  --ink-soft: #564150;
+  --stone: #867a8c;          /* cool mauve-grey labels */
+  --line: rgba(32, 19, 32, 0.16);
+  --line-light: rgba(232, 229, 234, 0.26);
+
+  --display: "Monsieur La Doulaise", "Cormorant Garamond", serif; /* ornate blackletter */
+  --serif: "Cormorant Garamond", Georgia, serif;                /* headings + body */
+
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --maxw: 70rem;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.18rem);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+::selection { background: var(--purple); color: var(--ivory); }
+:focus-visible { outline: 2px solid var(--purple-2); outline-offset: 3px; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.1; margin: 0; text-wrap: balance; }
+
+/* ---- primitives ---- */
+.eyebrow {
+  font-family: var(--serif); font-size: 0.82rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.3em; color: var(--stone); margin: 0;
+}
+.container { max-width: var(--maxw); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+.section { padding: clamp(3.5rem, 10vw, 7rem) 0; }
+.section--tight { padding: clamp(2.5rem, 6vw, 4rem) 0; }
+.section--line { border-top: 1px solid var(--line); }
+.prose { max-width: 38rem; }
+.muted { color: var(--ink-soft); }
+.center { text-align: center; }
+.rule { height: 1px; width: 4rem; background: var(--purple-2); opacity: 0.6; border: 0; margin: 1.75rem auto; }
+
+/* ---- Type hierarchy (four tiers, used consistently) ----
+   1. DISPLAY  .script-title  — ornate Monsieur script. Only the biggest
+      decorative moments: the couple's names and the main page titles.
+   2. HEADING   .section-title (large) / .heading-sub (smaller) — Cormorant
+      serif. All section and sub-section headings.
+   3. BODY      default serif paragraphs.
+   4. ACCENT    .eyebrow — small uppercase letter-spaced labels. */
+
+/* 1 · DISPLAY */
+.script-title {
+  font-family: var(--display); font-weight: 400; line-height: 1.15;
+  font-size: clamp(3.4rem, 11vw, 6.5rem); letter-spacing: 0.005em;
+}
+/* 2 · HEADINGS */
+.section-title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.3rem, 6vw, 3.6rem); margin-top: 0.4rem; letter-spacing: 0.01em; }
+.heading-sub { font-family: var(--serif); font-weight: 500; font-size: clamp(1.55rem, 3.2vw, 2.1rem); line-height: 1.18; letter-spacing: 0.01em; margin: 0; }
+
+/* ---- links & buttons ---- */
+.link {
+  color: var(--purple-2); text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%; background-repeat: no-repeat; background-size: 0% 1px;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1); padding-bottom: 2px;
+}
+.link:hover, .link:focus-visible { background-size: 100% 1px; }
+/* Always-underlined link — for touch devices with no hover (e.g. the dress code). */
+.link--static { background-size: 100% 1px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 3rem; padding: 0.85rem 2.1rem;
+  font-family: var(--serif); font-weight: 600; font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 0.26em; text-decoration: none; cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.btn--solid { background: var(--purple); color: var(--ivory); border: 1px solid var(--purple); }
+.btn--solid:hover { background: var(--purple-deep); border-color: var(--purple-deep); }
+.btn--outline { background: transparent; color: var(--purple); border: 1px solid var(--purple); }
+.btn--outline:hover { background: var(--purple); color: var(--ivory); }
+.btn--ghost { background: rgba(23, 13, 20, 0.28); color: var(--ivory); border: 1px solid var(--line-light); backdrop-filter: blur(2px); }
+.btn--ghost:hover { background: var(--ivory); color: var(--purple-deep); border-color: var(--ivory); }
+.btn--light { background: var(--ivory); color: var(--purple-deep); border: 1px solid var(--ivory); }
+.btn--light:hover { background: transparent; color: var(--ivory); border-color: var(--ivory); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+/* Dark eggplant bar, pearl/silver type — matches the mood. */
+/* Sticky, identical on every page. On the home page the hero pulls up
+   underneath it (see .hero below) so the image bleeds behind the bar. */
+.site-header { position: sticky; top: 0; z-index: 40; background: rgba(23, 13, 20, 0.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-light); }
+.nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 1.5rem; padding: 0.9rem 0; }
+.nav__brand { font-family: var(--display); font-weight: 400; font-size: 2.2rem; text-decoration: none; color: var(--ivory); line-height: 1; letter-spacing: 0.02em; }
+.nav__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.4rem; list-style: none; margin: 0; padding: 0; }
+.nav__links a { font-family: var(--serif); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(232, 229, 234, 0.74); transition: color 0.2s; }
+.nav__links a:hover, .nav__links a[aria-current="page"] { color: var(--ivory); }
+.nav__rsvp { background: var(--ivory); color: var(--purple-deep) !important; padding: 0.5rem 1.15rem; letter-spacing: 0.2em; }
+.nav__rsvp:hover { background: var(--purple-2); color: var(--ivory) !important; }
+/* Small viewports: stack the brand over centred links so nothing collides. */
+@media (max-width: 620px) {
+  .nav { justify-content: center; text-align: center; gap: 0.55rem 1rem; }
+  .nav__brand { flex: 0 0 100%; text-align: center; font-size: 2rem; }
+  .nav__links { width: 100%; justify-content: center; gap: 0.7rem 1.15rem; }
+}
+
+main { flex: 1; }
+
+/* Pull a section up under the sticky nav so its image bleeds behind the bar
+   (no flat gap above it), with the header's height added back as padding so
+   the content keeps its size. Used by the home hero and page photo headers. */
+.bleed-top {
+  margin-top: calc(-1 * var(--header-h, 4.5rem));
+  padding-top: calc(var(--header-h, 4.5rem) + clamp(2.5rem, 7vw, 4.5rem)) !important;
+}
+
+/* ============================================================
+   HERO — black/purple + ivory lace + silver mirror
+   ============================================================ */
+/* Clean mother-of-pearl backdrop behind the silver mirror. No glow,
+   no mask, just an even, moody field with a soft dark vignette for depth. */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: url("petals.webp") center / cover no-repeat, var(--purple-deep);
+  /* Pull the hero up under the sticky header so the image bleeds behind it. */
+  margin-top: calc(-1 * var(--header-h, 4.5rem));
+  padding: calc(var(--header-h, 4.5rem) + clamp(1.5rem, 5vw, 3rem)) 0 clamp(3rem, 8vw, 5.5rem);
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(70% 60% at 50% 45%, rgba(10, 6, 12, 0) 40%, rgba(10, 6, 12, 0.42) 100%);
+}
+.hero > .container { position: relative; z-index: 1; }
+.hero .mirror { filter: drop-shadow(0 1.75rem 3rem rgba(0, 0, 0, 0.5)); }
+.hero__inner { display: grid; justify-items: center; gap: clamp(2rem, 5vw, 3rem); }
+
+.mirror {
+  /* Hero now carries the silver TRAY (names engraved on it). */
+  container-type: inline-size; position: relative;
+  width: min(88vw, 29rem); aspect-ratio: 900 / 1374;
+  background: url("tray-web.webp") center / contain no-repeat;
+  filter: drop-shadow(0 1.5rem 2.75rem rgba(0, 0, 0, 0.6));
+}
+.mirror__glass {
+  position: absolute; inset: 25% 21% 25% 21%;
+  display: flex; flex-direction: column; justify-content: center; gap: 5cqw; align-items: center;
+  text-align: center; color: var(--ink);
+}
+.mirror__eyebrow { font-family: var(--serif); font-weight: 600; font-size: 3.4cqw; letter-spacing: 0.34em; text-transform: uppercase; margin: 0; text-indent: 0.34em; }
+.mirror__names { font-family: var(--display); font-weight: 400; line-height: 1.08; }
+.mirror__names .line { display: block; font-size: 13cqw; }
+.mirror__names .amp { font-size: 7.5cqw; opacity: 0.85; }
+.mirror__date { font-family: var(--serif); font-weight: 600; font-size: 4.2cqw; letter-spacing: 0.26em; text-indent: 0.26em; margin: 0; }
+
+.hero__meta { text-align: center; color: var(--ivory); }
+.hero__meta p { margin: 0; }
+.hero__place { font-family: var(--serif); font-size: clamp(1.1rem, 2.5vw, 1.45rem); letter-spacing: 0.2em; text-transform: uppercase; }
+.hero__note { font-family: var(--serif); font-style: italic; font-size: 0.95rem; letter-spacing: 0.1em; color: var(--ivory); opacity: 0.8; margin-top: 0.75rem; }
+.hero .btn-row { justify-content: center; }
+
+/* ============================================================
+   DARK FEATURE BAND — countdown / welcome
+   ============================================================ */
+.band { position: relative; color: var(--ivory); background: var(--purple-deep); overflow: hidden; }
+.band::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(14,8,16,0.58), rgba(26,16,24,0.7)), url("pearl.webp") center / cover no-repeat; }
+.band > .container { position: relative; z-index: 1; }
+.band .eyebrow { color: var(--ivory); opacity: 0.72; }
+.band .link { color: var(--ivory); }
+.countdown { display: flex; gap: 2rem; }
+.countdown .n { font-family: var(--serif); font-weight: 500; font-size: clamp(2.8rem, 8vw, 4rem); line-height: 1; }
+.countdown .eyebrow { color: var(--ivory); opacity: 0.72; }
+.countdown__row { display: flex; flex-direction: column; gap: 1.5rem; }
+@media (min-width: 700px) { .countdown__row { flex-direction: row; justify-content: space-between; align-items: center; } }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.split { display: grid; gap: 1.5rem; }
+@media (min-width: 820px) { .split { grid-template-columns: 1fr 1.12fr; gap: 4rem; align-items: start; } }
+.stack > * + * { margin-top: 1.2rem; }
+/* Our Story — offset editorial image pair. */
+.story-figure { margin: 0; overflow: hidden; background: var(--cream); }
+.story-figure img { width: 100%; display: block; }
+.story-figure--offset {
+  width: 64%; margin: -22% 0 0 auto; position: relative;
+  border: 6px solid var(--ivory);
+  box-shadow: 0 1.25rem 2.5rem rgba(20, 10, 16, 0.3);
+}
+
+/* Photographs of the couple — rendered black & white, so colour photos
+   convert automatically. Swap the placeholder src for your own images. */
+.detail-photo { margin: 0 0 3rem; overflow: hidden; background: var(--cream); border: 6px solid var(--ivory); box-shadow: 0 1.25rem 2.5rem rgba(20, 10, 16, 0.22); }
+.detail-photo img { width: 100%; height: clamp(16rem, 34vw, 26rem); object-fit: cover; display: block; }
+
+.story-single { margin: 0; overflow: hidden; background: var(--cream); border: 6px solid var(--ivory); box-shadow: 0 1.25rem 2.5rem rgba(20, 10, 16, 0.28); }
+.story-single img { width: 100%; display: block; filter: grayscale(1) contrast(1.04); }
+
+.story-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.story-photo { margin: 0; overflow: hidden; background: var(--cream); aspect-ratio: 4 / 5; }
+.story-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.story-photo img:hover { transform: scale(1.03); }
+.story-photo--tall { aspect-ratio: 3 / 4; }
+.story-photo--wide { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
+
+.facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+@media (min-width: 720px) { .facts { grid-template-columns: repeat(4, 1fr); } }
+.facts dt { margin: 0; }
+.facts dd { margin: 0.5rem 0 0; font-family: var(--serif); font-size: 1.4rem; line-height: 1.2; }
+
+/* ============================================================
+   PHOTO / TEXTURE BAND (venue, footer)
+   ============================================================ */
+.photo-band { position: relative; color: var(--ivory); background: var(--purple-deep); }
+.photo-band::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(rgba(13, 10, 19, 0.62), rgba(25, 10, 40, 0.74)), var(--photo);
+  background-size: cover; background-position: center;
+}
+.photo-band > .container { position: relative; z-index: 1; }
+.photo-band .eyebrow { color: var(--ivory); opacity: 0.8; }
+.venue-address { font-family: var(--serif); font-size: 1.15rem; letter-spacing: 0.06em; line-height: 1.9; }
+
+/* ============================================================
+   ORDER OF EVENTS — engraved on the silver tray
+   ============================================================ */
+/* Mother-of-pearl floral on black — pairs with the silver tray. */
+.tray-band { position: relative; color: var(--ivory); background: var(--black); overflow: hidden; }
+.tray-band::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(10,6,10,0.3), rgba(14,8,14,0.42)), url("grapes.webp") center / cover no-repeat; }
+.tray-band > .container { position: relative; z-index: 1; }
+.tray-band .eyebrow { color: var(--ivory); opacity: 0.8; }
+.tray {
+  /* The Evening now carries the arched MIRROR (schedule engraved on the glass). */
+  container-type: inline-size; position: relative;
+  width: min(86vw, 27rem); margin: clamp(2rem, 5vw, 3rem) auto 0;
+  aspect-ratio: 1000 / 1653;
+  background: url("mirror-web.webp") center / contain no-repeat;
+  filter: drop-shadow(0 1rem 2.25rem rgba(0, 0, 0, 0.55));
+}
+.tray__list {
+  position: absolute; inset: 32% 25% 22% 25%; margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; justify-content: center; gap: 3cqw;
+  text-align: center; color: var(--purple);
+}
+.tray__list li { margin: 0; }
+.tray__time { display: block; font-family: var(--serif); font-weight: 600; font-size: 4.6cqw; line-height: 1; }
+.tray__name { display: block; font-family: var(--serif); font-weight: 600; font-size: 3.4cqw; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 0.3cqw; }
+.tray__desc { display: block; font-family: var(--serif); font-style: italic; font-size: 2.8cqw; line-height: 1.1; color: #6a3a54; margin-top: 0.1cqw; }
+
+/* ============================================================
+   HOTELS / TRAVEL
+   ============================================================ */
+.hotel { display: grid; gap: 1.5rem; padding: 2.5rem 0; border-top: 1px solid var(--line); }
+@media (min-width: 760px) { .hotel { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+.hotel__photo { aspect-ratio: 4 / 3; background: var(--cream); overflow: hidden; }
+.hotel__photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.hotel__photo img:hover { transform: scale(1.03); }
+.hotel__rows { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; margin: 1.5rem 0; }
+.hotel__rows dt { margin: 0; }
+.hotel__rows dd { margin: 0.25rem 0 0; font-family: var(--serif); font-size: 0.95rem; }
+.stay { padding: 2rem 0; border-top: 1px solid var(--line); max-width: 44rem; }
+.travel-row { display: grid; gap: 0.75rem; padding: 2rem 0; border-top: 1px solid var(--line); }
+@media (min-width: 760px) { .travel-row { grid-template-columns: 16rem 1fr; gap: 2.5rem; } }
+
+/* ============================================================
+   WEDDING detail rows
+   ============================================================ */
+.event { display: grid; gap: 1rem; padding: 2.5rem 0; border-top: 1px solid var(--line); }
+@media (min-width: 760px) { .event { grid-template-columns: 9rem 1fr; gap: 2.5rem; } }
+.event__when time { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; }
+.event h3 { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 5vw, 3.2rem); line-height: 1; }
+.info-grid { display: grid; gap: 2.5rem; }
+@media (min-width: 760px) { .info-grid { grid-template-columns: 1fr 1fr; column-gap: 3.5rem; } }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.5rem 0; font-family: var(--serif); font-weight: 500; font-size: clamp(1.25rem, 3vw, 1.6rem); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.5rem; color: var(--purple-2); }
+.faq details[open] summary::after { content: "–"; }
+.faq p { margin: 0 0 1.5rem; color: var(--ink-soft); max-width: 42rem; }
+
+/* ============================================================
+   REGISTRY
+   ============================================================ */
+.registry-list { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.registry-list li { border-bottom: 1px solid var(--line); }
+.registry-list a { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.25rem 0; text-decoration: none; }
+.registry-list .arrow { font-family: var(--serif); font-size: 0.9rem; color: var(--purple-2); transition: transform 0.3s; }
+.registry-list a:hover .arrow { transform: translateX(4px); }
+
+/* ============================================================
+   RSVP (embedded Google Form)
+   ============================================================ */
+.rsvp-frame { border: 1px solid var(--line); background: var(--cream); overflow: hidden; margin-top: 2rem; }
+.rsvp-frame iframe { width: 100%; height: 78vh; min-height: 640px; border: 0; display: block; }
+
+/* ============================================================
+   FOOTER — ivory lace on near-black, gothic names
+   ============================================================ */
+.site-footer { margin-top: auto; position: relative; color: var(--ivory); background: var(--black); }
+.site-footer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(14,8,16,0.72), rgba(26,16,24,0.82)), url("pomegranates.webp") center / cover no-repeat; }
+.site-footer > .container { position: relative; z-index: 1; }
+.footer-grid { display: grid; gap: 3rem; padding: clamp(3.5rem, 8vw, 5.5rem) 0 2.5rem; }
+@media (min-width: 760px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+.footer-grid h2 { font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 7vw, 4.25rem); line-height: 1; }
+.footer-links { list-style: none; margin: 0; padding: 0; }
+.footer-links li + li { margin-top: 0.5rem; }
+.footer-links a { font-family: var(--serif); font-size: 0.95rem; color: var(--ivory); opacity: 0.85; text-decoration: none; }
+.footer-links a:hover { opacity: 1; }
+.site-footer .eyebrow { color: var(--ivory); opacity: 0.72; }
+.site-footer .link { color: var(--ivory); }
+.footer-base { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; padding: 1.5rem 0 3rem; border-top: 1px solid var(--line-light); margin-top: 3rem; }
+
+/* ============================================================
+   DEPTH — quote band, gallery, silver divider, pearl texture
+   ============================================================ */
+/* Romantic dark band over the cherry blossom. */
+.quote-band { position: relative; color: var(--ivory); background: var(--black); text-align: center; overflow: hidden; }
+.quote-band::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(10,6,10,0.52), rgba(14,8,14,0.66)), var(--qphoto, url("rug-purple.webp")) center / cover no-repeat; }
+.quote-band > .container { position: relative; z-index: 1; }
+.quote-band p { font-family: var(--serif); font-style: italic; font-size: clamp(1.35rem, 3.6vw, 2.15rem); max-width: 40rem; margin: 0 auto; line-height: 1.5; }
+.quote-band .eyebrow { color: var(--ivory); opacity: 0.72; }
+
+/* Mood gallery. */
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (min-width: 720px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+.gallery figure { margin: 0; overflow: hidden; aspect-ratio: 3 / 4; background: var(--cream); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.gallery img:hover { transform: scale(1.04); }
+
+/* Antique silver strip divider. */
+.silver-divider { height: clamp(64px, 10vw, 120px); background: url("silver-scroll.webp") center / cover no-repeat; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* Faint cool-pearl texture behind a light section. */
+.section--pearl { position: relative; }
+.section--pearl::before { content: ""; position: absolute; inset: 0; background: url("pearl-shell.webp") center / cover no-repeat; opacity: 0.12; pointer-events: none; }
+.section--pearl > .container { position: relative; z-index: 1; }
+
+/* Our Story — allow a third stacked figure. */
+.story-figure--third { width: 48%; margin: -30% auto 0 0; }
+
+/* ============================================================
+   MOTION (progressive)
+   ============================================================ */
+.js .reveal { opacity: 0; transform: translateY(14px); }
+.js .reveal.in { opacity: 1; transform: none; transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 50; background: var(--purple); color: var(--ivory); padding: 0.5rem 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
