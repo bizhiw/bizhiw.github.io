@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Neecha &amp; Alborz, 03.20.2027</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="description" content="Neecha & Alborz are getting married at Vaughan Estate, Toronto, Ontario on March 20, 2027. Schedule, travel and RSVP.">
   <meta name="robots" content="noindex, nofollow"> <!-- delete this line when you're ready for Google to find the site -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
