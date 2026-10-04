@@ -69,7 +69,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.1; marg
 .rule { height: 1px; width: 4rem; background: var(--purple-2); opacity: 0.6; border: 0; margin: 1.75rem auto; }
 
 /* ---- Type hierarchy (four tiers, used consistently) ----
-   1. DISPLAY  .script-title  — ornate Monsieur script. Only the biggest
+   1. DISPLAY  .script-title  — ornate Pinyon script. Only the biggest
       decorative moments: the couple's names and the main page titles.
    2. HEADING   .section-title (large) / .heading-sub (smaller) — Cormorant
       serif. All section and sub-section headings.
