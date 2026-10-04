@@ -24,7 +24,7 @@
   --line: rgba(32, 19, 32, 0.16);
   --line-light: rgba(232, 229, 234, 0.26);
 
-  --display: "Monsieur La Doulaise", "Cormorant Garamond", serif; /* ornate blackletter */
+  --display: "Pinyon Script", "Cormorant Garamond", serif; /* ornate script */
   --serif: "Cormorant Garamond", Georgia, serif;                /* headings + body */
 
   --gutter: clamp(1.25rem, 5vw, 5rem);
