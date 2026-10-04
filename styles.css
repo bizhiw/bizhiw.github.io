@@ -353,6 +353,11 @@ main { flex: 1; }
 .quote-band > .container { position: relative; z-index: 1; }
 .quote-band p { font-family: var(--serif); font-style: italic; font-size: clamp(1.35rem, 3.6vw, 2.15rem); max-width: 40rem; margin: 0 auto; line-height: 1.5; }
 .quote-band .eyebrow { color: var(--ivory); opacity: 0.72; }
+/* Light variant — a pale photo with dark text, to break up stacked dark bands. */
+.quote-band--light { color: var(--ink); background: var(--cream); }
+.quote-band--light::before { background: linear-gradient(rgba(238,235,241,0.52), rgba(238,235,241,0.66)), var(--qphoto, url("anemones.webp")) center / cover no-repeat; }
+.quote-band--light p { color: var(--ink); }
+.quote-band--light .eyebrow { color: var(--stone); opacity: 1; }
 
 /* Mood gallery. */
 .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
